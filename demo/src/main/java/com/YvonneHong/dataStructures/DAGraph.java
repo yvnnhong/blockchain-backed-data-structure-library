@@ -1,5 +1,5 @@
 package com.YvonneHong.dataStructures;
 
-public class CircularBuffer {
+public class DAGraph {
     
 }
