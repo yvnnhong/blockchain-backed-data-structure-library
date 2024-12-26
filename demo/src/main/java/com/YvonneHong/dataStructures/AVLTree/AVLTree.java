@@ -1,6 +1,9 @@
-package com.YvonneHong.dataStructures;
+package com.YvonneHong.dataStructures.AVLTree;
 
 public class AVLTree {
+
+
+    //private Node root; 
     //check if the new push worked ? 
     //maybe i should add a binary search tree (bst) ? 
 
