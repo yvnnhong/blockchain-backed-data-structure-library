@@ -74,7 +74,7 @@ public class AVLTree {
             }
 
             //node has two children, find the inorder successor (smallest in right subtree)
-            root.key = AVLTreeHelperMethods.minValue(root.right); 
+            root.key = AVLTreeHelperMethods.getMinValue(root.right); 
             root.right = delete(root.right, root.key);
         }
 
@@ -115,37 +115,24 @@ public class AVLTree {
     // 3) lookup (searching)
 
 
-    // 4) find max value 
+    // 4) inorder traversal (print out all the nodes)
 
 
-    // 5) find min value 
+    // 5) preorder traversal (print out all the nodes)
+
+    // 6) delete min value 
 
 
-    // 6) inorder traversal (print out all the nodes)
+    // 7) delete max value
 
 
-    // 7) preorder traversal (print out all the nodes)
+    // 8) clone the tree 
 
 
-    // 8) return height of tree / height calculation
+    // 9) find successor of a node: The successor of a node is the node with the smallest key greater than the given node's key.
 
 
-    // 9) balance factor calculation
-
-
-    // 10) delete min value 
-
-
-    // 11) delete max value
-
-
-    // 12) clone the tree 
-
-
-    // 13) find successor of a node: The successor of a node is the node with the smallest key greater than the given node's key.
-
-
-    // 14) find predecessor: The predecessor of a node is the node with the largest key smaller than the given node's key.
+    // 10) find predecessor: The predecessor of a node is the node with the largest key smaller than the given node's key.
 
     
 }

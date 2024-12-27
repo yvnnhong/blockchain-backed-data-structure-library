@@ -61,7 +61,7 @@ public class AVLTreeHelperMethods {
         return getHeight(node.left) - getHeight(node.right); 
     }
 
-    public static int maxValue(Node root) {
+    public static int getMaxValue(Node root) {
         Node current = root; 
         //traverse to the rightmost node, which contains the largest key
         while(current.right != null) {
@@ -70,7 +70,7 @@ public class AVLTreeHelperMethods {
         return current.key; //return the maximum value found
     }
 
-    public static int minValue(Node root) {
+    public static int getMinValue(Node root) {
         Node current = root; 
         //traverse to the leftmost node, which contains the smallest key
         while(current.left != null) {
