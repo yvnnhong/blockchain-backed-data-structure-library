@@ -18,6 +18,7 @@ public class AVLTreeHelperMethods {
         return x; //return the new root x
     }
 
+
     public static Node singleLeftRotation(Node x) {
         Node y = x.right; 
         Node T2 = y.left;
@@ -31,8 +32,8 @@ public class AVLTreeHelperMethods {
         y.height = Math.max(getHeight(y.left), getHeight(y.right)) + 1; 
 
         return y; 
-
     }
+
 
     public static Node leftRightDoubleRotation(Node node) {
         node.left = singleLeftRotation(node.left); //left rotate on left subtree
@@ -42,14 +43,22 @@ public class AVLTreeHelperMethods {
     public static Node rightLeftDoubleRotation(Node node) {
         node.right = singleRightRotation(node.right); //right rotate on right subtree
         return singleLeftRotation(node); //left rotate on root 
-
     }
+
 
     public static int getHeight(Node node) {
         if(node == null) {
             return 0; 
         }
         return node.height; 
+    }
+    
+
+    public static int getBalanceFactor(Node node) {
+        if(node == null) {
+            return 0; 
+        }
+        return getHeight(node.left) - getHeight(node.right); 
     }
     
 }
