@@ -74,12 +74,8 @@ public class AVLTree {
             }
 
             //node has two children, find the inorder successor (smallest in right subtree)
-            root.key = minValue(root.right); 
+            root.key = AVLTreeHelperMethods.minValue(root.right); 
             root.right = delete(root.right, root.key);
-        }
-        //if the tree only had 1 node, then return null
-        if(root == null) {
-            return root;
         }
 
         //update the height of the current node 
@@ -111,9 +107,7 @@ public class AVLTree {
             root.right = AVLTreeHelperMethods.singleRightRotation(root.right); 
             return AVLTreeHelperMethods.singleLeftRotation(root); 
         }
-        
         return root; 
-
     }
 
 
