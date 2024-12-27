@@ -5,5 +5,5 @@ This means that you can access static members without creating an instance of th
 Example usage: className.methodName(params); 
 More specifically: we are allowed to use the methods defined in AVLTreeHelperMethods.java in 
 AVLTree.java, as long as we call the method like this: AVLTreeHelperMethods.methodName(params); 
-Note that, due to the static invocation, we do not need to create an instance of the AVLTreeHelperMethods
+Note that, due to the static invocation, we do not need to create an instance (in AVLTree.java) of the AVLTreeHelperMethods
 class in order to use a method in it. 
