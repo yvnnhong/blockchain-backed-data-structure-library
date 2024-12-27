@@ -25,6 +25,30 @@ public class AVLTree {
         root.height = Math.max(AVLTreeHelperMethods.getHeight(root.left), AVLTreeHelperMethods.getHeight(root.right)) + 1; //error 
         
         int balance = AVLTreeHelperMethods.getBalanceFactor(root); 
+    
+        //case 1: single right rotation
+        if((balance > 1) && (key < root.left.key)) {
+            return AVLTreeHelperMethods.singleRightRotation(root); 
+        }
+
+        //case 2: single left rotation 
+        if((balance < -1) && (key > root.right.key)) {
+            return AVLTreeHelperMethods.singleLeftRotation(root); 
+        }
+
+        //case 3: left-right double rotation 
+        if((balance > 1) && (key > root.left.key)) {
+            root.left = AVLTreeHelperMethods.singleLeftRotation(root.left); 
+            return AVLTreeHelperMethods.singleRightRotation(root); 
+        }
+
+        //case 4: right-left double rotation 
+        if((balance < -1) && (key < root.right.key)) {
+            root.right = AVLTreeHelperMethods.singleRightRotation(root.right); 
+            return AVLTreeHelperMethods.singleLeftRotation(root); 
+        }
+        return root; 
+
     }
 
 
