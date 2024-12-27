@@ -8,11 +8,15 @@ public class AVLTree {
     //1) All nodes in the left subtree of a node are less than the node.
     //2) All nodes in the right subtree of a node are greater than the node.
 
+    //note: we're only comparing keys of nodes, the values literally have zero meaning and are just 
+    //the info that is stored in a node. We use the keys to access their corresponding values in nodes 
+
     //methods/operations to add: 
     // 1) insertion
     public Node insert(Node root, int key) {
+         //first, perform standard binary search tree (BST) insertion
         if(root == null) {
-            return new Node(key); 
+            return new Node(key); //create a new node if the tree is empty, or find position for new node 
         }
         if(key < root.key) {
             root.left = insert(root.left, key); 
@@ -48,11 +52,69 @@ public class AVLTree {
             return AVLTreeHelperMethods.singleLeftRotation(root); 
         }
         return root; 
-
     }
 
 
     // 2) deletion 
+    public Node delete(Node root, int key) {
+        //first, perform standard binary search tree (BST) deletion 
+        if(root == null) {
+             return root; //base case: the tree is empty 
+        }
+        //find the node to delete 
+        if(key < root.key) {
+            root.left = delete(root.left, key); 
+        } else if (key > root.key) {
+            root.right = delete(root.right, key); 
+        } else { //when the key matches the root 
+            if(root.left == null) {
+                return root.right; //if node has no left child, replace with right child
+            } else if(root.right == null) {
+                return root.left; //if node has no right child, replace with left child 
+            }
+
+            //node has two children, find the inorder successor (smallest in right subtree)
+            root.key = minValue(root.right); 
+            root.right = delete(root.right, root.key);
+        }
+        //if the tree only had 1 node, then return null
+        if(root == null) {
+            return root;
+        }
+
+        //update the height of the current node 
+        root.height = Math.max(AVLTreeHelperMethods.getHeight(root.left), AVLTreeHelperMethods.getHeight(root.right)) + 1; 
+
+        //get the balance factor 
+        int balance = AVLTreeHelperMethods.getBalanceFactor(root); 
+
+        //next, perform rotations if the node became unbalanced 
+
+        //case 1: single right rotation
+        if((balance > 1) && (AVLTreeHelperMethods.getBalanceFactor(root.left) >= 0)) {
+            return AVLTreeHelperMethods.singleRightRotation(root); 
+        }
+
+        //case 2: single left rotation 
+        if((balance < -1) && (AVLTreeHelperMethods.getBalanceFactor(root.right) <= 0)) {
+            return AVLTreeHelperMethods.singleLeftRotation(root); 
+        }
+
+        //case 3: left-right double rotation 
+        if((balance > 1) && (AVLTreeHelperMethods.getBalanceFactor(root.left) < 0)) {
+            root.left = AVLTreeHelperMethods.singleLeftRotation(root.left); 
+            return AVLTreeHelperMethods.singleRightRotation(root); 
+        }
+
+        //case 4: right-left double rotation 
+        if((balance < -1) && (AVLTreeHelperMethods.getBalanceFactor(root.right) > 0)) {
+            root.right = AVLTreeHelperMethods.singleRightRotation(root.right); 
+            return AVLTreeHelperMethods.singleLeftRotation(root); 
+        }
+        
+        return root; 
+
+    }
 
 
 
