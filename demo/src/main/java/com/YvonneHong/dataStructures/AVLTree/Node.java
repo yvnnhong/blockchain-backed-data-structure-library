@@ -8,7 +8,8 @@ public class Node {
 
     public Node(int key){
         this.key = key; 
-        this.left = this.right = null; 
+        this.left = null; 
+        this.right = null; 
         this.height = 1; //new nodes are initially at a height of 1
     }
 }
