@@ -22,13 +22,14 @@ public class AVLTree {
             return root; //duplicate keys are not allowed 
         }
 
-        root.height = Math.max(getHeight(root.left), getHeight(root.right)) + 1; //error 
+        root.height = Math.max(AVLTreeHelperMethods.getHeight(root.left), AVLTreeHelperMethods.getHeight(root.right)) + 1; //error 
         
-
+        int balance = AVLTreeHelperMethods.getBalanceFactor(root); 
     }
 
 
     // 2) deletion 
+
 
 
     // 3) lookup (searching)
