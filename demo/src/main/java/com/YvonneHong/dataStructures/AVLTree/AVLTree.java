@@ -207,7 +207,30 @@ public class AVLTree {
     // 9) find successor of a node: The successor of a node is the node with the smallest key greater than the given node's key.
     public static Node findSuccessor(Node root, int key){
         //Find the node that matches the key
-        Node node = lookup(root, key); 
+        Node node = AVLTreeHelperMethods.lookup(root, key); 
+        if(node == null) {
+            return null; //key not found in the tree
+        }
+        //case 1: if the node has a right child, the successor is the leftmost node in the right subtree
+        if(node.right != null) {
+            return AVLTreeHelperMethods.findMin(node.right); //find the minimum in the right subtree
+        }
+        //case 2: if the node does not have a right child, go up to find the first ancestor
+        //that is the left child of its parent (that parent will be the successor)
+        Node parent = root; 
+        Node successor = null; 
+
+        while(parent != null){
+            if(key < parent.key) {
+                successor = parent; //this is a potential successor 
+                parent = parent.left; 
+            } else if (key > parent.key){
+                parent = parent.right; 
+            } else {
+                break; //?? maybe we should not use a break 
+            }
+        }
+        return successor; 
     }
 
 

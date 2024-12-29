@@ -61,7 +61,7 @@ public class AVLTreeHelperMethods {
         return getHeight(node.left) - getHeight(node.right); 
     }
 
-    public static int getMaxValue(Node root) {
+    public static int getMaxValue(Node root) { //returns an INT (the actual key? or value? stored in the node)
         Node current = root; 
         //traverse to the rightmost node, which contains the largest key
         while(current.right != null) {
@@ -70,13 +70,32 @@ public class AVLTreeHelperMethods {
         return current.key; //return the maximum value found
     }
 
-    public static int getMinValue(Node root) {
+    /*TODO: differentiate between key and values. accommodate for 
+    cases in which the keys are the same as the values, and cases where they're different*/
+
+    public static int getMinValue(Node root) { //returns an INT (the actual key? or VALUE? stored in the node)
         Node current = root; 
         //traverse to the leftmost node, which contains the smallest key
         while(current.left != null) {
             current = current.left; 
         }
         return current.key; //return the minimum value found 
+    }
+
+    //Helper function to find the maximum value node in a subtree (returns a NODE)
+    protected static Node findMax(Node node) {
+        while(node.right != null) {
+            node = node.right; 
+        }
+        return node;
+    }
+
+    //Helper function to find the minimum value node in a subtree (returns a NODE)
+    protected static Node findMin(Node node) {
+        while(node.left != null) {
+            node = node.left; 
+        }
+        return node;
     }
 
     //helper method to rebalance a node 
