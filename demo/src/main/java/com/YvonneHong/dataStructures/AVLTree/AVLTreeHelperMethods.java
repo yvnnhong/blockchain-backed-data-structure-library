@@ -102,5 +102,19 @@ public class AVLTreeHelperMethods {
         }
         return root; //return the node after balancing
     } 
+
+    //lookup helper method 
+    public static Node lookup(Node root, int key) {
+        //traverse the tree to find the node with the specified key 
+        if(root == null || root.key == key){
+            return root; 
+        }
+        //if the key is smaller than the root's key, search in the left subtree
+        if(key < root.key) {
+            return lookup(root.left, key); 
+        }
+        //if the key is larger than the root's key, search in the right subtree
+        return lookup(root.right, key); 
+    }
     
 }

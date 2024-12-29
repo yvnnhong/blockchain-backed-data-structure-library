@@ -6,6 +6,7 @@ public class Node {
     Node right; 
     int height; 
 
+    //constructor for the Node class 
     public Node(int key){
         this.key = key; 
         this.left = null; 

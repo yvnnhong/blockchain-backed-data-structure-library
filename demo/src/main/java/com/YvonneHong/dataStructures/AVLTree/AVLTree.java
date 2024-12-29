@@ -205,6 +205,10 @@ public class AVLTree {
 
 
     // 9) find successor of a node: The successor of a node is the node with the smallest key greater than the given node's key.
+    public static Node findSuccessor(Node root, int key){
+        //Find the node that matches the key
+        Node node = lookup(root, key); 
+    }
 
 
     // 10) find predecessor: The predecessor of a node is the node with the largest key smaller than the given node's key.
