@@ -78,5 +78,29 @@ public class AVLTreeHelperMethods {
         }
         return current.key; //return the minimum value found 
     }
+
+    //helper method to rebalance a node 
+    protected static Node rebalance(Node root, int balance) {
+        // Case 1: Single right rotation 
+        if(balance > 1) {
+            return singleRightRotation(root); 
+        }
+        //Case 2: single left rotation
+        if(balance < -1) {
+            return singleLeftRotation(root); 
+        }
+        //case 3: left-right double rotation 
+        if((balance > 1) && (getBalanceFactor(root.left) < 0)){
+            root.left = singleLeftRotation(root.left); //left rotate the left subtree
+            return singleRightRotation(root); //right rotate the root 
+        }
+
+        //case 4: right-left double rotation 
+        if((balance < -1) && (getBalanceFactor(root.right) > 0)){
+            root.right = singleRightRotation(root.right); //right-rotate the right subtree
+            return singleLeftRotation(root); //left-rotate the root 
+        }
+        return root; //return the node after balancing
+    } 
     
 }

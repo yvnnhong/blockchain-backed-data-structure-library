@@ -146,6 +146,25 @@ public class AVLTree {
     }
 
     // 6) delete min value 
+    public Node deleteMin(Node root){
+        if(root == null) {
+            return root; //if the tree is empty, return null
+        }
+        //if there is no left child, root is the minimum node 
+        if(root.left == null) {
+            return root.right; //replace root with its right child 
+        }
+
+        //Recurse left to find the minimum node
+        root.left = deleteMin(root.left); 
+
+        //Update height and balance factor of the node 
+        root.height = Math.max(AVLTreeHelperMethods.getHeight(root.left), AVLTreeHelperMethods.getHeight(root.right)) + 1;
+        int balance = AVLTreeHelperMethods.getBalanceFactor(root); 
+
+        //rebalance the tree if necessary 
+        return AVLTreeHelperMethods.rebalance(root, balance); 
+    }
 
 
     // 7) delete max value
