@@ -189,6 +189,19 @@ public class AVLTree {
 
 
     // 8) clone the tree 
+    public static Node cloneAVLTree(Node root) {
+        if(root == null) {
+            return null; //if the tree is empty, return null
+        }
+        //create a node with the same key, and recursively clone left and right subtrees 
+        Node node = new Node(root.key); 
+        node.left = cloneAVLTree(root.left); 
+        node.right = cloneAVLTree(root.right); 
+
+        //update height for the cloned node
+        node.height = Math.max(AVLTreeHelperMethods.getHeight(node.left), AVLTreeHelperMethods.getHeight(node.right)) + 1; 
+        return node; //return the root node of the new (cloned) tree 
+    }
 
 
     // 9) find successor of a node: The successor of a node is the node with the smallest key greater than the given node's key.
