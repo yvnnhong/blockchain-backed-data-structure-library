@@ -4,8 +4,8 @@ public class AVLTreeHelperMethods {
 
 
     public static Node singleRightRotation(Node y) {
-        Node x = y.left; 
-        Node T2 = x.right; 
+        Node x = y.left; //node x is the left child of y 
+        Node T2 = x.right; //T2 is the right child of x
 
         //perform the rotation 
         x.right = y; 
