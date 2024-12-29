@@ -113,12 +113,37 @@ public class AVLTree {
 
 
     // 3) lookup (searching)
+    public Node lookup(Node root, int key) {
+        //traverse the tree to find the key 
+        if((root == null) || (root.key == key)) {
+            return root; //means we found the key or reached a leaf 
+        }
+        if(key < root.key){
+            return lookup(root.left, key); //search in left subtree
+        } else {
+            return lookup(root.right, key); //search in right subtree
+        }
+    }
 
 
-    // 4) inorder traversal (print out all the nodes)
+    // 4) inorder traversal (print out all the nodes in ascending order)
+    public void inorder(Node root) {
+        if(root != null){
+            inorder(root.left); //traverse left subtree
+            System.out.print(root.key + " "); //visit current node
+            inorder(root.right); //traverse right subtree
+        }
+    }
 
 
-    // 5) preorder traversal (print out all the nodes)
+    // 5) preorder traversal (print out all the nodes in root-left-right order)
+    public void preorder(Node root){
+        if(root != null) {
+            System.out.print(root.key + " "); //visit current node
+            preorder(root.left); //traverse left subtree
+            preorder(root.right); //traverse right subtree 
+        }
+    }
 
     // 6) delete min value 
 
