@@ -235,6 +235,33 @@ public class AVLTree {
 
 
     // 10) find predecessor: The predecessor of a node is the node with the largest key smaller than the given node's key.
+    public static Node findPredecessor(Node root, int key) {
+        //find the node that matches the key
+        Node node = AVLTreeHelperMethods.lookup(root, key); 
+        if(node == null) {
+            return null; //key not found in the tree
+        }
+        //case 1: if the node has a left child, the predecessor is the rightmost node in the left subtree
+        if(node.left != null){
+            return AVLTreeHelperMethods.findMax(node.left); //find the maximum in the left subtree
+        }
+        //case 2: if the node does not have a left child, go up to find the first ancestor
+        //that is the right child of its parent (that parent will be the predecessor)
+        Node parent = root; 
+        Node predecessor = null; 
 
+        while(parent != null) {
+            if(key < parent.key) {
+                parent = parent.left; 
+            } else if(key > parent.key) {
+                predecessor = parent; //this is a potential predecessor
+                parent = parent.right; 
+            } else {
+                break; 
+            }
+        }
+        return predecessor; 
+
+    }
     
 }
