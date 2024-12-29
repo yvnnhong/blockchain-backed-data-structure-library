@@ -1,5 +1,5 @@
 package com.YvonneHong.dataStructures;
 
-public class Stack {
+public class MinHeap {
     
 }
