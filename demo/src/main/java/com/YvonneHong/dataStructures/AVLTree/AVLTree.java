@@ -168,6 +168,24 @@ public class AVLTree {
 
 
     // 7) delete max value
+    public Node deleteMax(Node root) {
+        if(root==null){
+            return root; //if the tree is empty, return null
+        }
+        //if there is no right child, root is the maximum node 
+        if(root.right == null) {
+            return root.left; //replace root with its left child
+        }
+        //recurse right to find the maximum node 
+        root.right = deleteMax(root.right); 
+
+        //update height and balance factor of the node 
+        root.height = Math.max(AVLTreeHelperMethods.getHeight(root.left), AVLTreeHelperMethods.getHeight(root.right)) + 1;
+        int balance = AVLTreeHelperMethods.getBalanceFactor(root); 
+
+        //rebalance the tree if necessary
+        return AVLTreeHelperMethods.rebalance(root, balance); 
+    }
 
 
     // 8) clone the tree 
