@@ -23,7 +23,7 @@ public class BinarySearchTree {
         root = BSTHelperMethods.deleteRecursive(root, value);
     }
 
-    //get the size of the tree 
+    //get the size of the tree -- tells us how many total nodes are in the tree 
     public int size() {
         return BSTHelperMethods.sizeRecursive(root); 
     }
