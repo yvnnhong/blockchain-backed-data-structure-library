@@ -63,5 +63,80 @@ public class BTreeHelperMethods {
 
         fullChild.numKeys = t - 1; 
     }
+
+    private void delete(BTreeNode node, int key) {
+        int index = findKey(node, key); 
+        if((index < node.numKeys) && (node.keys[index] == key)) {
+            if(node.isLeaf) {
+                removeFromLeaf(node, index); 
+            } else {
+                removeFromNonLeaf(node, index); 
+            }
+        } else {
+            if(node.isLeaf) {
+                return; 
+            }
+            boolean flag = (index == node.numKeys) ? true : false; 
+            if(node.children[index].numKeys < t) {
+                fill(node, index);
+            }
+            if(flag && index > node.numKeys) {
+                delete(node.children[index - 1], key); 
+            } else {
+                delete(node.children[index], key); 
+            }
+        }
+    }
+
+    private int findKey(BTreeNode node, int key) {
+        int index = 0; 
+        while((index < node.numKeys) && (node.keys[index] < key)) {
+            index++;
+        }
+        return index;
+    }
+
+    private void removeFromLeaf(BTreeNode node, int index) {
+        for(int i = index + 1; i < node.numKeys; i++) {
+            node.keys[i - 1] = node.keys[i]; 
+        }
+        node.numKeys--; 
+    }
+
+    private void removeFromNonLeaf(BTreeNode node, int index) {
+        int key = node.keys[index]; 
+        if(node.children[index].numKeys >= t) {
+            int pred = getPred(node, index); 
+            node.keys[index] = pred; 
+            delete(node.children[index], pred);
+        } else if(node.children[index + 1].numKeys >= t) {
+            int succ = getSucc(node, index);
+            node.keys[index] = succ;
+            delete(node.children[index + 1], succ); 
+        } else {
+            merge(node, index); 
+            delete(node.children[index], key); 
+        }
+    }
+
+    private int getPred(BTreeNode node, int index) {
+        BTreeNode current = node.children[index]; 
+        while(!current.isLeaf) {
+            current = current.children[current.numKeys]; 
+        }
+        return current.keys[current.numKeys - 1]; 
+    }
+
+    private int getSucc(BTreeNode node, int index) {
+        BTreeNode current = node.children[index + 1]; 
+        while(!current.isLeaf) {
+            current = current.children[0];
+        }
+        return current.keys[0]; 
+    }
+
+    private void fill(BTreeNode node, int index) {
+        
+    }
     
 }
