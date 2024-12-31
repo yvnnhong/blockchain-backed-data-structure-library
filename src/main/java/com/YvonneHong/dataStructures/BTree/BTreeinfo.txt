@@ -4,3 +4,4 @@ Rules for B-Trees
 of nodes in a key, divided by 2
 2. The number of child nodes in a non-leaf node is always one more than its number of keys 
 3. The root node is the only node that is allowed to have less than maxKeys/2 children
+4. 
