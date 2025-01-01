@@ -3,9 +3,9 @@ package com.YvonneHong.dataStructures.AVLTree;
 public class AVLTreeHelperMethods {
 
 
-    public static Node singleRightRotation(Node y) {
-        Node x = y.left; //node x is the left child of y 
-        Node T2 = x.right; //T2 is the right child of x
+    public static AVLTreeNode singleRightRotation(AVLTreeNode y) {
+        AVLTreeNode x = y.left; //node x is the left child of y 
+        AVLTreeNode T2 = x.right; //T2 is the right child of x
 
         //perform the rotation 
         x.right = y; 
@@ -19,9 +19,9 @@ public class AVLTreeHelperMethods {
     }
 
 
-    public static Node singleLeftRotation(Node x) {
-        Node y = x.right; 
-        Node T2 = y.left;
+    public static AVLTreeNode singleLeftRotation(AVLTreeNode x) {
+        AVLTreeNode y = x.right; 
+        AVLTreeNode T2 = y.left;
 
         //perform rotation 
         y.left = x; 
@@ -35,18 +35,18 @@ public class AVLTreeHelperMethods {
     }
 
 
-    public static Node leftRightDoubleRotation(Node node) {
+    public static AVLTreeNode leftRightDoubleRotation(AVLTreeNode node) {
         node.left = singleLeftRotation(node.left); //left rotate on left subtree
         return singleRightRotation(node); //right rotate on root 
     }
 
-    public static Node rightLeftDoubleRotation(Node node) {
+    public static AVLTreeNode rightLeftDoubleRotation(AVLTreeNode node) {
         node.right = singleRightRotation(node.right); //right rotate on right subtree
         return singleLeftRotation(node); //left rotate on root 
     }
 
 
-    public static int getHeight(Node node) {
+    public static int getHeight(AVLTreeNode node) {
         if(node == null) {
             return 0; 
         }
@@ -54,15 +54,15 @@ public class AVLTreeHelperMethods {
     }
     
 
-    public static int getBalanceFactor(Node node) {
+    public static int getBalanceFactor(AVLTreeNode node) {
         if(node == null) {
             return 0; 
         }
         return getHeight(node.left) - getHeight(node.right); 
     }
 
-    public static int getMaxValue(Node root) { //returns an INT (the actual key? or value? stored in the node)
-        Node current = root; 
+    public static int getMaxValue(AVLTreeNode root) { //returns an INT (the actual key? or value? stored in the node)
+        AVLTreeNode current = root; 
         //traverse to the rightmost node, which contains the largest key
         while(current.right != null) {
             current = current.right; 
@@ -73,8 +73,8 @@ public class AVLTreeHelperMethods {
     /*differentiate between key and values. accommodate for 
     cases in which the keys are the same as the values, and cases where they're different*/
 
-    public static int getMinValue(Node root) { //returns an INT (the actual key? or VALUE? stored in the node)
-        Node current = root; 
+    public static int getMinValue(AVLTreeNode root) { //returns an INT (the actual key? or VALUE? stored in the node)
+        AVLTreeNode current = root; 
         //traverse to the leftmost node, which contains the smallest key
         while(current.left != null) {
             current = current.left; 
@@ -83,7 +83,7 @@ public class AVLTreeHelperMethods {
     }
 
     //Helper function to find the maximum value node in a subtree (returns a NODE)
-    protected static Node findMax(Node node) {
+    protected static AVLTreeNode findMax(AVLTreeNode node) {
         while(node.right != null) {
             node = node.right; 
         }
@@ -91,7 +91,7 @@ public class AVLTreeHelperMethods {
     }
 
     //Helper function to find the minimum value node in a subtree (returns a NODE)
-    protected static Node findMin(Node node) {
+    protected static AVLTreeNode findMin(AVLTreeNode node) {
         while(node.left != null) {
             node = node.left; 
         }
@@ -99,7 +99,7 @@ public class AVLTreeHelperMethods {
     }
 
     //helper method to rebalance a node 
-    protected static Node rebalance(Node root, int balance) {
+    protected static AVLTreeNode rebalance(AVLTreeNode root, int balance) {
         // Case 1: Single right rotation 
         if(balance > 1) {
             return singleRightRotation(root); 
@@ -123,7 +123,7 @@ public class AVLTreeHelperMethods {
     } 
 
     //lookup helper method 
-    public static Node lookup(Node root, int key) {
+    public static AVLTreeNode lookup(AVLTreeNode root, int key) {
         //traverse the tree to find the node with the specified key 
         if(root == null || root.key == key){
             return root; 

@@ -3,9 +3,9 @@ package com.YvonneHong.dataStructures.BinarySearchTree;
 public class BSTHelperMethods {
 
     //base case: if the tree is empty or we reach a leaf node, insert the value
-    protected static Node insertRecursive(Node node, int value){
+    protected static BSTNode insertRecursive(BSTNode node, int value){
         if(node == null) {
-            return new Node(value);
+            return new BSTNode(value);
         }
         //recursively insert into the left or right subtree
         if(value < node.value) {
@@ -16,7 +16,7 @@ public class BSTHelperMethods {
         return node; 
     }
 
-    protected static boolean searchRecursive(Node node, int value) {
+    protected static boolean searchRecursive(BSTNode node, int value) {
         //base case: if the node is null, the value is not found
         if(node == null) {
             return false;
@@ -31,7 +31,7 @@ public class BSTHelperMethods {
         return value < node.value ? searchRecursive(node.left, value) : searchRecursive(node.right, value); 
     }
 
-    protected static Node deleteRecursive(Node node, int value) {
+    protected static BSTNode deleteRecursive(BSTNode node, int value) {
         //base case: if the node is null, return null (value not found)
         if(node == null) {
             return null; 
@@ -66,7 +66,7 @@ public class BSTHelperMethods {
     }
 
     //find the minimum value node in the tree 
-    private static Node findMin(Node node) {
+    private static BSTNode findMin(BSTNode node) {
         while(node.left != null) {
             node = node.left; 
         }
@@ -74,7 +74,7 @@ public class BSTHelperMethods {
     }
 
     //recursively calculate size 
-    protected static int sizeRecursive(Node node) {
+    protected static int sizeRecursive(BSTNode node) {
         if(node == null) {
             return 0; 
         }
@@ -82,7 +82,7 @@ public class BSTHelperMethods {
     }
 
     //recursively compute height
-    protected static int heightRecursive(Node node) {
+    protected static int heightRecursive(BSTNode node) {
         if(node == null) {
             return -1; 
         }
@@ -91,7 +91,7 @@ public class BSTHelperMethods {
         return Math.max(leftHeight, rightHeight) + 1; 
     }
 
-    protected static void inorderTraversalRecursive(Node node){
+    protected static void inorderTraversalRecursive(BSTNode node){
         if(node != null) {
             inorderTraversalRecursive(node.left);
             System.out.print(node.value + " "); 
@@ -99,7 +99,7 @@ public class BSTHelperMethods {
         }
     }
 
-    protected static void preorderTraversalRecursive(Node node){
+    protected static void preorderTraversalRecursive(BSTNode node){
         if(node != null) {
             System.out.print(node.value + " "); 
             preorderTraversalRecursive(node.left);
@@ -107,7 +107,7 @@ public class BSTHelperMethods {
         }
     }
 
-    protected static void postOrderTravelRecursive(Node node) {
+    protected static void postOrderTravelRecursive(BSTNode node) {
         if(node != null) {
             postOrderTravelRecursive(node.left);
             postOrderTravelRecursive(node.right);

@@ -11,7 +11,7 @@ public class AVLTreeTest {
         System.out.println("Running AVL Tree Tests...");
 
         // Test 1: Insert elements into the AVL Tree
-        Node root = null;
+        AVLTreeNode root = null;
         AVLTree tree = new AVLTree();
 
         root = tree.insert(root, 30);
@@ -47,23 +47,23 @@ public class AVLTreeTest {
 
         // Test 6: Clone the tree
         System.out.println("\nCloning the tree...");
-        Node clonedRoot = AVLTree.cloneAVLTree(root);
+        AVLTreeNode clonedRoot = AVLTree.cloneAVLTree(root);
         System.out.print("In-order traversal of the cloned tree: ");
         tree.inorder(clonedRoot); // Expected: 20 25 30 35
 
         // Test 7: Find successor
         System.out.println("\nFinding successor of 25...");
-        Node successor = AVLTree.findSuccessor(root, 25);
+        AVLTreeNode successor = AVLTree.findSuccessor(root, 25);
         System.out.println("Successor of 25: " + (successor != null ? successor.key : "None")); // Expected: 30
 
         // Test 8: Find predecessor
         System.out.println("\nFinding predecessor of 25...");
-        Node predecessor = AVLTree.findPredecessor(root, 25);
+        AVLTreeNode predecessor = AVLTree.findPredecessor(root, 25);
         System.out.println("Predecessor of 25: " + (predecessor != null ? predecessor.key : "None")); // Expected: 20
 
         // Test 9: Edge case for empty tree lookup
         System.out.println("\nLookup on an empty tree:");
-        Node emptyRoot = null;
+        AVLTreeNode emptyRoot = null;
         System.out.println("Lookup 10 in empty tree: " + (tree.lookup(emptyRoot, 10) != null ? "Found" : "Not Found")); // Expected: Not Found
 
         // Test 10: Edge case for delete in empty tree

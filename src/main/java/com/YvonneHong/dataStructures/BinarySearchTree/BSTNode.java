@@ -1,11 +1,11 @@
 package com.YvonneHong.dataStructures.BinarySearchTree;
 
-public class Node {
+public class BSTNode {
     int value; 
-    Node left;
-    Node right; 
+    BSTNode left;
+    BSTNode right; 
 
-    public Node(int value){
+    public BSTNode(int value){
         this.value = value;
         this.left = null;
         this.right = null;

@@ -13,10 +13,10 @@ public class AVLTree {
 
     //methods/operations to add: 
     // 1) insertion
-    public Node insert(Node root, int key) {
+    public AVLTreeNode insert(AVLTreeNode root, int key) {
          //first, perform standard binary search tree (BST) insertion
         if(root == null) {
-            return new Node(key); //create a new node if the tree is empty, or find position for new node 
+            return new AVLTreeNode(key); //create a new node if the tree is empty, or find position for new node 
         }
         if(key < root.key) {
             root.left = insert(root.left, key); 
@@ -56,7 +56,7 @@ public class AVLTree {
 
 
     // 2) deletion 
-    public Node delete(Node root, int key) {
+    public AVLTreeNode delete(AVLTreeNode root, int key) {
         //first, perform standard binary search tree (BST) deletion 
         if(root == null) {
              return root; //base case: the tree is empty 
@@ -113,7 +113,7 @@ public class AVLTree {
 
 
     // 3) lookup (searching)
-    public Node lookup(Node root, int key) {
+    public AVLTreeNode lookup(AVLTreeNode root, int key) {
         //traverse the tree to find the key 
         if((root == null) || (root.key == key)) {
             return root; //means we found the key or reached a leaf 
@@ -127,7 +127,7 @@ public class AVLTree {
 
 
     // 4) inorder traversal (print out all the nodes in ascending order)
-    public void inorder(Node root) {
+    public void inorder(AVLTreeNode root) {
         if(root != null){
             inorder(root.left); //traverse left subtree
             System.out.print(root.key + " "); //visit current node
@@ -137,7 +137,7 @@ public class AVLTree {
 
 
     // 5) preorder traversal (print out all the nodes in root-left-right order)
-    public void preorder(Node root){
+    public void preorder(AVLTreeNode root){
         if(root != null) {
             System.out.print(root.key + " "); //visit current node
             preorder(root.left); //traverse left subtree
@@ -146,7 +146,7 @@ public class AVLTree {
     }
 
     // 6) delete min value 
-    public Node deleteMin(Node root){
+    public AVLTreeNode deleteMin(AVLTreeNode root){
         if(root == null) {
             return root; //if the tree is empty, return null
         }
@@ -168,7 +168,7 @@ public class AVLTree {
 
 
     // 7) delete max value
-    public Node deleteMax(Node root) {
+    public AVLTreeNode deleteMax(AVLTreeNode root) {
         if(root==null){
             return root; //if the tree is empty, return null
         }
@@ -189,12 +189,12 @@ public class AVLTree {
 
 
     // 8) clone the tree 
-    public static Node cloneAVLTree(Node root) {
+    public static AVLTreeNode cloneAVLTree(AVLTreeNode root) {
         if(root == null) {
             return null; //if the tree is empty, return null
         }
         //create a node with the same key, and recursively clone left and right subtrees 
-        Node node = new Node(root.key); 
+        AVLTreeNode node = new AVLTreeNode(root.key); 
         node.left = cloneAVLTree(root.left); 
         node.right = cloneAVLTree(root.right); 
 
@@ -205,9 +205,9 @@ public class AVLTree {
 
 
     // 9) find successor of a node: The successor of a node is the node with the smallest key greater than the given node's key.
-    public static Node findSuccessor(Node root, int key){
+    public static AVLTreeNode findSuccessor(AVLTreeNode root, int key){
         //Find the node that matches the key
-        Node node = AVLTreeHelperMethods.lookup(root, key); 
+        AVLTreeNode node = AVLTreeHelperMethods.lookup(root, key); 
         if(node == null) {
             return null; //key not found in the tree
         }
@@ -217,8 +217,8 @@ public class AVLTree {
         }
         //case 2: if the node does not have a right child, go up to find the first ancestor
         //that is the left child of its parent (that parent will be the successor)
-        Node parent = root; 
-        Node successor = null; 
+        AVLTreeNode parent = root; 
+        AVLTreeNode successor = null; 
 
         while(parent != null){
             if(key < parent.key) {
@@ -235,9 +235,9 @@ public class AVLTree {
 
 
     // 10) find predecessor: The predecessor of a node is the node with the largest key smaller than the given node's key.
-    public static Node findPredecessor(Node root, int key) {
+    public static AVLTreeNode findPredecessor(AVLTreeNode root, int key) {
         //find the node that matches the key
-        Node node = AVLTreeHelperMethods.lookup(root, key); 
+        AVLTreeNode node = AVLTreeHelperMethods.lookup(root, key); 
         if(node == null) {
             return null; //key not found in the tree
         }
@@ -247,8 +247,8 @@ public class AVLTree {
         }
         //case 2: if the node does not have a left child, go up to find the first ancestor
         //that is the right child of its parent (that parent will be the predecessor)
-        Node parent = root; 
-        Node predecessor = null; 
+        AVLTreeNode parent = root; 
+        AVLTreeNode predecessor = null; 
 
         while(parent != null) {
             if(key < parent.key) {

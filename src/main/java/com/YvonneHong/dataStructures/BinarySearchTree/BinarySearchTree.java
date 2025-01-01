@@ -2,7 +2,7 @@ package com.YvonneHong.dataStructures.BinarySearchTree;
 
 public class BinarySearchTree {
 
-    private Node root; 
+    private BSTNode root; 
 
     public BinarySearchTree() {
         this.root = null; 
