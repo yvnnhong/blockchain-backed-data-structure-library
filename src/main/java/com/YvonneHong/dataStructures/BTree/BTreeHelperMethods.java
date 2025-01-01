@@ -2,9 +2,9 @@ package com.YvonneHong.dataStructures.BTree;
 
 public class BTreeHelperMethods {
 
-    private int t; //minimum degree (defines the range for number of keys)
+    protected static int t; //minimum degree (defines the range for number of keys)
 
-    private BTreeNode search(BTreeNode node, int key) {
+    protected static BTreeNode searchRecursive(BTreeNode node, int key) {
         int i = 0; 
         while((i < node.numKeys) && (key > node.keys[i])) {
             i++;
@@ -15,10 +15,10 @@ public class BTreeHelperMethods {
         if(node.isLeaf) {
             return null; //key is not found in the leaf node 
         }
-        return search(node.children[i], key); //recurse on the child 
+        return searchRecursive(node.children[i], key); //recurse on the child 
     }
 
-    private void insertNonFull(BTreeNode node, int key) {
+    protected static void insertNonFull(BTreeNode node, int key) {
         int i = node.numKeys - 1;
         if(node.isLeaf) {
             while((i >= 0) && (key < node.keys[i])) {
@@ -43,7 +43,7 @@ public class BTreeHelperMethods {
     }
 
     //split operation to split a full child node 
-    private void split(BTreeNode parent, int i) {
+    protected static void split(BTreeNode parent, int i) {
         BTreeNode fullChild = parent.children[i];
         BTreeNode newChild = new BTreeNode(t, fullChild.isLeaf); 
 
@@ -64,7 +64,7 @@ public class BTreeHelperMethods {
         fullChild.numKeys = t - 1; 
     }
 
-    private void delete(BTreeNode node, int key) {
+    protected static void deleteRecursive(BTreeNode node, int key) {
         int index = findKey(node, key); 
         if((index < node.numKeys) && (node.keys[index] == key)) {
             if(node.isLeaf) {
@@ -81,14 +81,14 @@ public class BTreeHelperMethods {
                 fill(node, index);
             }
             if(flag && index > node.numKeys) {
-                delete(node.children[index - 1], key); 
+                deleteRecursive(node.children[index - 1], key); 
             } else {
-                delete(node.children[index], key); 
+                deleteRecursive(node.children[index], key); 
             }
         }
     }
 
-    private int findKey(BTreeNode node, int key) {
+    protected static int findKey(BTreeNode node, int key) {
         int index = 0; 
         while((index < node.numKeys) && (node.keys[index] < key)) {
             index++;
@@ -96,30 +96,30 @@ public class BTreeHelperMethods {
         return index;
     }
 
-    private void removeFromLeaf(BTreeNode node, int index) {
+    protected static void removeFromLeaf(BTreeNode node, int index) {
         for(int i = index + 1; i < node.numKeys; i++) {
             node.keys[i - 1] = node.keys[i]; 
         }
         node.numKeys--; 
     }
 
-    private void removeFromNonLeaf(BTreeNode node, int index) {
+    protected static void removeFromNonLeaf(BTreeNode node, int index) {
         int key = node.keys[index]; 
         if(node.children[index].numKeys >= t) {
             int pred = getPred(node, index); 
             node.keys[index] = pred; 
-            delete(node.children[index], pred);
+            deleteRecursive(node.children[index], pred);
         } else if(node.children[index + 1].numKeys >= t) {
             int succ = getSucc(node, index);
             node.keys[index] = succ;
-            delete(node.children[index + 1], succ); 
+            deleteRecursive(node.children[index + 1], succ); 
         } else {
             merge(node, index); 
-            delete(node.children[index], key); 
+            deleteRecursive(node.children[index], key); 
         }
     }
 
-    private int getPred(BTreeNode node, int index) {
+    private static int getPred(BTreeNode node, int index) {
         BTreeNode current = node.children[index]; 
         while(!current.isLeaf) {
             current = current.children[current.numKeys]; 
@@ -127,7 +127,7 @@ public class BTreeHelperMethods {
         return current.keys[current.numKeys - 1]; 
     }
 
-    private int getSucc(BTreeNode node, int index) {
+    private static int getSucc(BTreeNode node, int index) {
         BTreeNode current = node.children[index + 1]; 
         while(!current.isLeaf) {
             current = current.children[0];
@@ -135,7 +135,7 @@ public class BTreeHelperMethods {
         return current.keys[0]; 
     }
 
-    private void fill(BTreeNode node, int index) {
+    private static void fill(BTreeNode node, int index) {
         if (index != 0 && node.children[index - 1].numKeys >= t) {
             borrowFromPrev(node, index);
         } else if (index != node.numKeys && node.children[index + 1].numKeys >= t) {
@@ -149,9 +149,9 @@ public class BTreeHelperMethods {
         }
     }
 
-    private void borrowFromPrev(Node node, int index) {
-        Node child = node.children[index];
-        Node sibling = node.children[index - 1];
+    private static void borrowFromPrev(BTreeNode node, int index) {
+        BTreeNode child = node.children[index];
+        BTreeNode sibling = node.children[index - 1];
 
         for (int i = child.numKeys - 1; i >= 0; i--) {
             child.keys[i + 1] = child.keys[i];
@@ -171,9 +171,9 @@ public class BTreeHelperMethods {
         child.numKeys++;
     }
 
-    private void borrowFromNext(Node node, int index) {
-        Node child = node.children[index];
-        Node sibling = node.children[index + 1];
+    private static void borrowFromNext(BTreeNode node, int index) {
+        BTreeNode child = node.children[index];
+        BTreeNode sibling = node.children[index + 1];
 
         child.keys[child.numKeys] = node.keys[index];
         if (!child.isLeaf) {
@@ -194,9 +194,9 @@ public class BTreeHelperMethods {
         child.numKeys++;
     }
 
-    private void merge(Node node, int index) {
-        Node child = node.children[index];
-        Node sibling = node.children[index + 1];
+    private static void merge(BTreeNode node, int index) {
+        BTreeNode child = node.children[index];
+        BTreeNode sibling = node.children[index + 1];
 
         child.keys[t - 1] = node.keys[index];
         for (int i = 0; i < sibling.numKeys; i++) {
@@ -219,12 +219,12 @@ public class BTreeHelperMethods {
         child.numKeys += sibling.numKeys + 1;
     }
 
-    private void display(BTreeNode node, String indent, boolean last) {
+    protected static void displayRecursive(BTreeNode node, String indent, boolean last) {
         System.out.println(indent + "+- " + (last ? "-" : "|") + " " + node);
         indent += last ? "   " : "|  ";
         for (int i = 0; i < node.numKeys; i++) {
             if (!node.isLeaf) {
-                display(node.children[i], indent, i == node.numKeys - 1);
+                displayRecursive(node.children[i], indent, i == node.numKeys - 1);
             }
         }
     }

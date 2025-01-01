@@ -11,7 +11,7 @@ public class BTree {
 
     //search operation
     public BTreeNode search(int key) {
-        return search(root, key);
+        return BTreeHelperMethods.searchRecursive(root, key);
     }
     
     //insert operation
@@ -20,10 +20,25 @@ public class BTree {
         if(root.numKeys == (2 * t - 1)){
             BTreeNode newNode = new BTreeNode(t, false); 
             newNode.children[0] = this.root; 
-            split(newNode, 0);
+            BTreeHelperMethods.split(newNode, 0);
             root = newNode; 
             this.root = root; 
         }
-        insertNonFull(root, key);
+        BTreeHelperMethods.insertNonFull(root, key);
     }
+
+    // Delete operation
+    public void delete(int key) {
+        BTreeHelperMethods.deleteRecursive(root, key);
+        if (root.numKeys == 0 && !root.isLeaf) {
+            root = root.children[0];
+        }
+    }
+
+    // Display method (in-order traversal)
+    public void display() {
+        BTreeHelperMethods.displayRecursive(root, "", true);
+    }
+
+
 }
