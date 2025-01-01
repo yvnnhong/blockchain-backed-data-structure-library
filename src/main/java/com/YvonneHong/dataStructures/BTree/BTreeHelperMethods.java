@@ -136,7 +136,97 @@ public class BTreeHelperMethods {
     }
 
     private void fill(BTreeNode node, int index) {
-        
+        if (index != 0 && node.children[index - 1].numKeys >= t) {
+            borrowFromPrev(node, index);
+        } else if (index != node.numKeys && node.children[index + 1].numKeys >= t) {
+            borrowFromNext(node, index);
+        } else {
+            if (index != node.numKeys) {
+                merge(node, index);
+            } else {
+                merge(node, index - 1);
+            }
+        }
+    }
+
+    private void borrowFromPrev(Node node, int index) {
+        Node child = node.children[index];
+        Node sibling = node.children[index - 1];
+
+        for (int i = child.numKeys - 1; i >= 0; i--) {
+            child.keys[i + 1] = child.keys[i];
+        }
+        if (!child.isLeaf) {
+            for (int i = child.numKeys; i >= 0; i--) {
+                child.children[i + 1] = child.children[i];
+            }
+        }
+        child.keys[0] = node.keys[index - 1];
+        if (!node.isLeaf) {
+            child.children[0] = sibling.children[sibling.numKeys];
+        }
+        node.keys[index - 1] = sibling.keys[sibling.numKeys - 1];
+
+        sibling.numKeys--;
+        child.numKeys++;
+    }
+
+    private void borrowFromNext(Node node, int index) {
+        Node child = node.children[index];
+        Node sibling = node.children[index + 1];
+
+        child.keys[child.numKeys] = node.keys[index];
+        if (!child.isLeaf) {
+            child.children[child.numKeys + 1] = sibling.children[0];
+        }
+        node.keys[index] = sibling.keys[0];
+
+        for (int i = 1; i < sibling.numKeys; i++) {
+            sibling.keys[i - 1] = sibling.keys[i];
+        }
+        if (!sibling.isLeaf) {
+            for (int i = 1; i <= sibling.numKeys; i++) {
+                sibling.children[i - 1] = sibling.children[i];
+            }
+        }
+
+        sibling.numKeys--;
+        child.numKeys++;
+    }
+
+    private void merge(Node node, int index) {
+        Node child = node.children[index];
+        Node sibling = node.children[index + 1];
+
+        child.keys[t - 1] = node.keys[index];
+        for (int i = 0; i < sibling.numKeys; i++) {
+            child.keys[i + t] = sibling.keys[i];
+        }
+        if (!child.isLeaf) {
+            for (int i = 0; i <= sibling.numKeys; i++) {
+                child.children[i + t] = sibling.children[i];
+            }
+        }
+
+        for (int i = index + 1; i < node.numKeys; i++) {
+            node.keys[i - 1] = node.keys[i];
+        }
+        for (int i = index + 2; i <= node.numKeys; i++) {
+            node.children[i - 1] = node.children[i];
+        }
+
+        node.numKeys--;
+        child.numKeys += sibling.numKeys + 1;
+    }
+
+    private void display(BTreeNode node, String indent, boolean last) {
+        System.out.println(indent + "+- " + (last ? "-" : "|") + " " + node);
+        indent += last ? "   " : "|  ";
+        for (int i = 0; i < node.numKeys; i++) {
+            if (!node.isLeaf) {
+                display(node.children[i], indent, i == node.numKeys - 1);
+            }
+        }
     }
     
 }
