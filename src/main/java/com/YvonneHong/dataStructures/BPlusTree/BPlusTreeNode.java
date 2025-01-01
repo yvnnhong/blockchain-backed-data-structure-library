@@ -1,5 +1,5 @@
 package com.YvonneHong.dataStructures.BPlusTree;
 
-public class Node {
+public class BPlusTreeNode {
     
 }

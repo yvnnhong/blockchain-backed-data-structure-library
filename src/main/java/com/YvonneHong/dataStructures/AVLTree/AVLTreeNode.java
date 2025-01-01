@@ -1,13 +1,13 @@
 package com.YvonneHong.dataStructures.AVLTree;
 
-public class Node {
+public class AVLTreeNode {
     int key; 
-    Node left; 
-    Node right; 
+    AVLTreeNode left; 
+    AVLTreeNode right; 
     int height; 
 
     //constructor for the Node class 
-    public Node(int key){
+    public AVLTreeNode(int key){
         this.key = key; 
         this.left = null; 
         this.right = null; 
