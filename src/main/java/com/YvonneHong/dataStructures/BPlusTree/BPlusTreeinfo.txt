@@ -1,0 +1,7 @@
+BPlusTree info 
+1. data is stored only in leaf nodes (in B-trees, data is stored at every level)
+2. leaf nodes are linked in a doubly linked list (B-tree does not have this property)
+3. search involves only internal nodes, data found at leaf nodes 
+4. more efficient due to linked leaf nodes 
+5. typically shorter (compared to b-trees) because only keys are stored in internal nodes 
+6. more efficient than b-trees due to storage structure 
