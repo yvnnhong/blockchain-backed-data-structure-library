@@ -5,3 +5,6 @@ BPlusTree info
 4. more efficient due to linked leaf nodes 
 5. typically shorter (compared to b-trees) because only keys are stored in internal nodes 
 6. more efficient than b-trees due to storage structure 
+
+More info 
+in a b-plus tree, the degree (aka order) is the maximum number of keys that a node can contain
