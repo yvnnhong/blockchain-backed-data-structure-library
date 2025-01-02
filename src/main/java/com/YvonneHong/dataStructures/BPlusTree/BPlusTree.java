@@ -11,7 +11,7 @@ public class BPlusTree {
     }
 
     //insert a key-value pair into the tree 
-    public void insert(int key, String value){
+    protected void insert(int key, String value){
         //if the root node is full, split it 
         if(root.isFull()){
             BPTinternalNode newRoot = new BPTinternalNode(degree); 
@@ -23,20 +23,18 @@ public class BPlusTree {
     }
 
     //search for a value associated with a key 
-    public String search(int key){
+    protected String search(int key){
         return root.search(key);
     }
 
     //delete a key from the tree
-    public void delete(int key) {
+    protected void delete(int key) {
         root.delete(key); 
     }
 
     //print the tree for debugging purposes 
-    public void printTree() {
+    protected void printTree() {
         root.printNode();
     }
-
    
-
 }

@@ -16,7 +16,7 @@ public class BPTLeafNode extends BPlusTreeNode {
     }
 
     //split the leaf node when it is full 
-    public BPTLeafNode split() {
+    protected BPTLeafNode split() {
         int midIndex = keys.size() / 2;
         BPTLeafNode newLeaf = new BPTLeafNode(degree); 
 
@@ -44,18 +44,18 @@ public class BPTLeafNode extends BPlusTreeNode {
     }
 
     //add a key-value pair to this leaf node 
-    public void addKey(int key){
+    protected void addKey(int key){
         keys.add(key); 
     }
 
     //add a value to this leaf node 
-    public void addValue(String value) {
+    protected void addValue(String value) {
         values.add(value); 
     }
 
     //insert a key-value pair into this leaf node 
     @Override 
-    public void insert(int key, String value){
+    protected void insert(int key, String value){
         int index = 0; 
         while((index < keys.size()) && (keys.get(index) < key)){
             index++; 
@@ -66,7 +66,7 @@ public class BPTLeafNode extends BPlusTreeNode {
 
     //search for a value by key in this leaf node 
     @Override
-    public String search(int key) {
+    protected String search(int key) {
         int index = keys.indexOf(key); 
         if(index >= 0) {
             return values.get(index); 
@@ -76,7 +76,7 @@ public class BPTLeafNode extends BPlusTreeNode {
 
     //print the leaf node for debugging 
     @Override 
-    public void printNode() { //change name to printNodeKeys instead ? 
+    protected void printNode() { //change name to printNodeKeys instead ? 
         System.out.print("Leaf Node Keys: ");
         for(int key : keys) {
             System.out.print(key + " "); 

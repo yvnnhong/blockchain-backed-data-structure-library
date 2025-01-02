@@ -13,7 +13,7 @@ public class BPTinternalNode extends BPlusTreeNode {
 
     // Override the insert method for internal nodes
     @Override
-    public void insert(int key, String value) {
+    protected void insert(int key, String value) {
         // Logic to insert key into the appropriate child
         int index = findChildIndex(key);
         BPlusTreeNode child = children.get(index);
@@ -30,21 +30,21 @@ public class BPTinternalNode extends BPlusTreeNode {
 
     // Override the search method for internal nodes
     @Override
-    public String search(int key) {
+    protected String search(int key) {
         int index = findChildIndex(key);
         return children.get(index).search(key);
     }
 
     // Override the delete method for internal nodes
     @Override
-    public void delete(int key) {
+    protected void delete(int key) {
         int index = findChildIndex(key);
         children.get(index).delete(key);
     }
 
     // Override the print method for internal nodes
     @Override
-    public void printNode() {
+    protected void printNode() {
         System.out.print("Internal Node Keys: ");
         for (int key : keys) {
             System.out.print(key + " ");
@@ -65,7 +65,7 @@ public class BPTinternalNode extends BPlusTreeNode {
     }
 
     // Split the child at a given index (this method can be extended)
-    public void splitChild(int index) {
+    protected void splitChild(int index) {
         // Get the child to split
         BPlusTreeNode child = children.get(index);
         
@@ -94,7 +94,7 @@ public class BPTinternalNode extends BPlusTreeNode {
     }
 
     // Split the internal node (called by splitChild)
-    public BPTinternalNode split() {
+    protected BPTinternalNode split() {
         // Determine the midpoint
         int midIndex = keys.size() / 2;
         BPTinternalNode newInternalNode = new BPTinternalNode(degree);
@@ -121,12 +121,12 @@ public class BPTinternalNode extends BPlusTreeNode {
     }
 
     // Helper method to add key
-    public void addKey(int key) {
+    protected void addKey(int key) {
         keys.add(key);
     }
 
     // Helper method to add child node
-    public void addChild(BPlusTreeNode child) {
+    protected void addChild(BPlusTreeNode child) {
         children.add(child);
     }
 }

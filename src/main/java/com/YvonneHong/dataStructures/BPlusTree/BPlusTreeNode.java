@@ -13,12 +13,12 @@ import java.util.List;
         }
 
         //method to check if the node is full 
-        public boolean isFull(){
+        protected boolean isFull(){
             return keys.size() >= degree; 
         }
 
         //method to add a key 
-        public void addKey(int key){
+        protected void addKey(int key){
             keys.add(key); 
         }
 
@@ -27,22 +27,22 @@ import java.util.List;
         //and leaf nodes, which both require different implementations of the below methods/operations
         
         //insert brief method description
-        public void insert(int key, String value){
+        protected void insert(int key, String value){
 
         }
 
         //insert brief method description 
-        public String search(int key){ 
+        protected String search(int key){ 
             return null; 
         }
 
         //insert brief method description 
-        public void delete(int key){
+        protected void delete(int key){
 
         }
 
-        //insert brief method description 
-        public void printNode() {
+        //for debugging purposes -- print out all keys of a given node 
+        protected void printNode() {
             
         }
 
