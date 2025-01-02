@@ -1,4 +1,6 @@
 Fenwick Tree information 
 "flipping the rightmost bit" typically refers to flipping the least significant bit 
-that is set to 1 (i.e., the rightmost 1 bit) in a binary number. This means you change 
+that is set to 1 (i.e., the rightmost 1 bit) in a binary number**. This means you change 
 the rightmost 1 bit to 0, and any bits to the right of it (if any) remain unchanged.
+
+**--> we flip 1 to 0 
