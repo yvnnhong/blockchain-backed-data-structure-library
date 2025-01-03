@@ -1,0 +1,5 @@
+Cartesian Tree Rules 
+1. either max heap or min heap 
+2. has to follow BST property (all nodes in right subtree > parent node, 
+all nodes in left subtree < parent node)
+3. Follows the inorder traversal property rule
