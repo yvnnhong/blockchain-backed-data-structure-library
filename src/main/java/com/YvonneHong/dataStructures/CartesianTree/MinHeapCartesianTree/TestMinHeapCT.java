@@ -1,10 +1,10 @@
-package com.YvonneHong.dataStructures.CartesianTree.MaxHeapCartesianTree;
+package com.YvonneHong.dataStructures.CartesianTree.MinHeapCartesianTree;
 
-public class TestMaxHeapCT {
+public class TestMinHeapCT {
 
     public static void main(String[] args) {
-        // Create a MaxHeapCT instance
-        MaxHeapCT heap = new MaxHeapCT();
+        // Create a MinHeapCT instance
+        MinHeapCT heap = new MinHeapCT();
 
         // Test insertions
         System.out.println("Inserting values: 20, 15, 30, 10, 25...");
@@ -18,14 +18,14 @@ public class TestMaxHeapCT {
         System.out.println("Heap after insertion:");
         heap.printTree();
 
-        // Test peek (should return the maximum value, which is 30)
-        System.out.println("Peek (max value): " + heap.peek());
+        // Test peek (should return the smallest value, which is 10)
+        System.out.println("Peek (min value): " + heap.peek());
 
-        // Test popMax (should return and remove the maximum value, which is 30)
-        System.out.println("Pop Max: " + heap.popMax());
+        // Test popMin (should return and remove the smallest value, which is 10)
+        System.out.println("Pop Min: " + heap.popMin());
 
-        // Print the tree after popping the max value
-        System.out.println("Heap after popping max value:");
+        // Print the tree after popping the min value
+        System.out.println("Heap after popping min value:");
         heap.printTree();
 
         // Test delete method
@@ -42,10 +42,8 @@ public class TestMaxHeapCT {
         // Test popping all elements to empty the heap
         System.out.println("Popping all elements:");
         while (heap.size() > 0) {
-            System.out.println("Pop Max: " + heap.popMax());
+            System.out.println("Pop Min: " + heap.popMin());
             heap.printTree();
         }
     }
 }
-
-
